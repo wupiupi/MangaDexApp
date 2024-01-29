@@ -38,10 +38,10 @@ struct BookInfo: Decodable {
 
 struct Attribute: Decodable {
     let title: Language
-//    let description: Language // Может быть пустой (в JSON {}, но не понял, как прописать правильно. "?" не работает
+    let description: Language? // прописал как опционал, так как иногда в JSON он имел значение {}
     let year: Int
 }
 
 struct Language: Decodable {
-    let en: String
+    let en: String?
 }
