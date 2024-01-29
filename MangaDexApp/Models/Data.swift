@@ -39,7 +39,7 @@ struct BookInfo: Decodable {
 struct Attribute: Decodable {
     let title: Language
     let description: Language? // прописал как опционал, так как иногда в JSON он имел значение {}
-    let year: Int
+    let year: Int?
 }
 
 struct Language: Decodable {
