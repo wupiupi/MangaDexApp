@@ -40,11 +40,12 @@ private extension MainViewController {
             
             do {
                 let data = try JSONDecoder().decode(Book.self, from: data)
-                print(data)
+                print(data.data)
             } catch {
                 print(error.localizedDescription, error)
             }
             
         }.resume()
     }
+
 }
