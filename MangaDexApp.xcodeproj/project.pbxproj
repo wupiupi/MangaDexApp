@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		A03E30CA2B683009007A5F75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E30C92B683009007A5F75 /* AppDelegate.swift */; };
 		A03E30CC2B683009007A5F75 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E30CB2B683009007A5F75 /* SceneDelegate.swift */; };
-		A03E30CE2B683009007A5F75 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E30CD2B683009007A5F75 /* MainViewController.swift */; };
+		A03E30CE2B683009007A5F75 /* MangaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E30CD2B683009007A5F75 /* MangaListViewController.swift */; };
 		A03E30D12B683009007A5F75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A03E30CF2B683009007A5F75 /* Main.storyboard */; };
 		A03E30D32B68300A007A5F75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A03E30D22B68300A007A5F75 /* Assets.xcassets */; };
 		A03E30D62B68300A007A5F75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A03E30D42B68300A007A5F75 /* LaunchScreen.storyboard */; };
-		A03E30E22B683883007A5F75 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E30E12B683883007A5F75 /* Data.swift */; };
+		A03E30E22B683883007A5F75 /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E30E12B683883007A5F75 /* Manga.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A03E30C62B683009007A5F75 /* MangaDexApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaDexApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03E30C92B683009007A5F75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A03E30CB2B683009007A5F75 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A03E30CD2B683009007A5F75 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A03E30CD2B683009007A5F75 /* MangaListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaListViewController.swift; sourceTree = "<group>"; };
 		A03E30D02B683009007A5F75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A03E30D22B68300A007A5F75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A03E30D52B68300A007A5F75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A03E30D72B68300A007A5F75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A03E30E12B683883007A5F75 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		A03E30E12B683883007A5F75 /* Manga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 		A03E30DF2B6834CF007A5F75 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A03E30CD2B683009007A5F75 /* MainViewController.swift */,
+				A03E30CD2B683009007A5F75 /* MangaListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -97,7 +97,7 @@
 		A03E30E02B683814007A5F75 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A03E30E12B683883007A5F75 /* Data.swift */,
+				A03E30E12B683883007A5F75 /* Manga.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,8 +173,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A03E30E22B683883007A5F75 /* Data.swift in Sources */,
-				A03E30CE2B683009007A5F75 /* MainViewController.swift in Sources */,
+				A03E30E22B683883007A5F75 /* Manga.swift in Sources */,
+				A03E30CE2B683009007A5F75 /* MangaListViewController.swift in Sources */,
 				A03E30CA2B683009007A5F75 /* AppDelegate.swift in Sources */,
 				A03E30CC2B683009007A5F75 /* SceneDelegate.swift in Sources */,
 			);

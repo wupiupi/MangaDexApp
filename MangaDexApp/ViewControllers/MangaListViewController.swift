@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MangaListViewController.swift
 //  MangaDexApp
 //
 //  Created by Paul Makey on 29.01.24.
@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class MainViewController: UITableViewController {
-
-    private let url = URL(string: "https://api.mangadex.org/manga")!
+final class MangaListViewController: UITableViewController {
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -28,9 +26,12 @@ final class MainViewController: UITableViewController {
     }
 }
 
-private extension MainViewController {
+// MARK: - Private Methods
+private extension MangaListViewController {
     func fetchData() {
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        let mangaList = URL(string: "https://api.mangadex.org/manga")!
+
+        URLSession.shared.dataTask(with: mangaList) { data, _, error in
             guard let data else {
                 print(error ?? "No error description")
                 return
@@ -39,10 +40,10 @@ private extension MainViewController {
             print(data)
             
             do {
-                let data = try JSONDecoder().decode(Book.self, from: data)
+                let data = try JSONDecoder().decode(Manga.self, from: data)
                 print(data.data)
             } catch {
-                print(error.localizedDescription, error)
+                print(error.localizedDescription)
             }
             
         }.resume()
