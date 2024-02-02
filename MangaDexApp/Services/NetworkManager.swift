@@ -17,11 +17,14 @@ enum NetworkError: Error {
 enum Link {
     case mangaList
     case getManga
+    case getCover
     
     var url: URL {
         switch self {
             case .mangaList: URL(string: "https://api.mangadex.org/manga?limit=100")!
             case .getManga: URL(string: "https://api.mangadex.org/manga/f4fa3679-6918-4684-bcb6-377c9f336898")!
+//            case .getCover: URL(string: "https://uploads.mangadex.org/covers/:manga-id/:cover-filename")!
+            case .getCover: URL(string: "https://uploads.mangadex.org/covers/f4fa3679-6918-4684-bcb6-377c9f336898/3e5857a9-cf3c-48fa-af36-964cc1b9368e.jpg")!
         }
     }
 }
