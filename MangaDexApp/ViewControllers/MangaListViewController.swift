@@ -26,6 +26,15 @@ final class MangaListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mangaTitleCell", for: indexPath)
+        
+        let manga = mangaList?.data[indexPath.row]
+        
+        var content = cell.defaultContentConfiguration()
+        content.text = manga?.attributes.title.en ?? "No title"
+        content.textProperties.color = .white
+        content.textProperties.font = .boldSystemFont(ofSize: 17)
+        cell.contentConfiguration = content
+        
         return cell
     }
 }
@@ -38,6 +47,9 @@ private extension MangaListViewController {
             switch result {
                 case .success(let mangaList):
                     self.mangaList = mangaList
+                    
+                    print(mangaList)
+                    print(mangaList.data.count)
                     tableView.reloadData()
                 case .failure(let error):
                     print(error)
