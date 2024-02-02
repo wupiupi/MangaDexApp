@@ -15,6 +15,7 @@
 		A03E30D62B68300A007A5F75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A03E30D42B68300A007A5F75 /* LaunchScreen.storyboard */; };
 		A03E30E22B683883007A5F75 /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E30E12B683883007A5F75 /* Manga.swift */; };
 		A089D2992B6D3C7B00EE78FE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A089D2982B6D3C7B00EE78FE /* NetworkManager.swift */; };
+		A0F46DC32B6D988B0088BF6B /* MangaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F46DC22B6D988B0088BF6B /* MangaDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A03E30D72B68300A007A5F75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03E30E12B683883007A5F75 /* Manga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 		A089D2982B6D3C7B00EE78FE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A0F46DC22B6D988B0088BF6B /* MangaDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				A03E30CD2B683009007A5F75 /* MangaListViewController.swift */,
+				A0F46DC22B6D988B0088BF6B /* MangaDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F46DC32B6D988B0088BF6B /* MangaDetailsViewController.swift in Sources */,
 				A03E30E22B683883007A5F75 /* Manga.swift in Sources */,
 				A03E30CE2B683009007A5F75 /* MangaListViewController.swift in Sources */,
 				A089D2992B6D3C7B00EE78FE /* NetworkManager.swift in Sources */,
