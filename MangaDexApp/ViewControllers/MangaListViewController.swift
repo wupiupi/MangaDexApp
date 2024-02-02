@@ -18,6 +18,13 @@ final class MangaListViewController: UITableViewController {
         tableView.rowHeight = 100
         fetchData()
     }
+    
+    // MARK: - Navigaion
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailsVC = segue.destination as? MangaDetailsViewController
+        guard let index = tableView.indexPathForSelectedRow?.row else { return }
+        detailsVC?.manga = mangaList?.data[index]
+    }
 
     // MARK: - UITableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,16 +32,16 @@ final class MangaListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "mangaTitleCell", for: indexPath)
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mangaTitleCell", for: indexPath)
         let manga = mangaList?.data[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
         content.text = manga?.attributes.title.en ?? "No title"
         content.textProperties.color = .white
         content.textProperties.font = .boldSystemFont(ofSize: 17)
+
         cell.contentConfiguration = content
-        
         return cell
     }
 }
@@ -47,9 +54,6 @@ private extension MangaListViewController {
             switch result {
                 case .success(let mangaList):
                     self.mangaList = mangaList
-                    
-                    print(mangaList)
-                    print(mangaList.data.count)
                     tableView.reloadData()
                 case .failure(let error):
                     print(error)
