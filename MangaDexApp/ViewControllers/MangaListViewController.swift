@@ -9,44 +9,39 @@ import UIKit
 
 final class MangaListViewController: UITableViewController {
     
+    private let networkManager = NetworkManager.shared
+    private var mangaList: MangaList?
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 100
         fetchData()
     }
 
     // MARK: - UITableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        mangaList?.data.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "manga", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mangaTitleCell", for: indexPath)
         return cell
     }
 }
 
-// MARK: - Private Methods
+// MARK: - Networking
 private extension MangaListViewController {
     func fetchData() {
-        let mangaList = URL(string: "https://api.mangadex.org/manga")!
-
-        URLSession.shared.dataTask(with: mangaList) { data, _, error in
-            guard let data else {
-                print(error ?? "No error description")
-                return
+        networkManager.fetch(MangaList.self, from: Link.mangaList.url) { [weak self] result in
+            guard let self else { return }
+            switch result {
+                case .success(let mangaList):
+                    self.mangaList = mangaList
+                    tableView.reloadData()
+                case .failure(let error):
+                    print(error)
             }
-            
-            print(data)
-            
-            do {
-                let data = try JSONDecoder().decode(Manga.self, from: data)
-                print(data.data)
-            } catch {
-                print(error.localizedDescription)
-            }
-            
-        }.resume()
+        }
     }
-
 }
