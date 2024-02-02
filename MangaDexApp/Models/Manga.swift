@@ -8,19 +8,26 @@
 import Foundation
 
 struct Manga: Decodable {
+    let data: MangaInfo
+}
+
+struct MangaList: Decodable {
     let data: [MangaInfo]
 }
 
 struct MangaInfo: Decodable {
     let id: String
-    let type: String
+    let type: String?
     let attributes: Attribute
 }
 
 struct Attribute: Decodable {
     let title: Language
-    let description: Language? // прописал как опционал, 
-                               // так как иногда в JSON оно имело значение {}
+    let description: Language?
+    let lastVolume: String?
+    let lastChapter: String?
+    let status: String?
+    let contentRating: String?
     let year: Int?
 }
 
