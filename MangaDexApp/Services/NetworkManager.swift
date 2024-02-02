@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Enumerations
 enum NetworkError: Error {
     case noData
     case invalidURL
@@ -19,7 +20,7 @@ enum Link {
     
     var url: URL {
         switch self {
-            case .mangaList: URL(string: "https://api.mangadex.org/manga")!
+            case .mangaList: URL(string: "https://api.mangadex.org/manga?limit=100")!
             case .getManga: URL(string: "https://api.mangadex.org/manga/f4fa3679-6918-4684-bcb6-377c9f336898")!
         }
     }
@@ -27,6 +28,8 @@ enum Link {
 
 final class NetworkManager {
     static let shared = NetworkManager()
+    
+    private init() {}
     
     func fetchImage(from url: URL, completion: @escaping(Result<Data, NetworkError>) -> Void) {
         DispatchQueue.global().async {
@@ -61,7 +64,4 @@ final class NetworkManager {
             
         }.resume()
     }
-    
-    
-    private init() {}
 }
