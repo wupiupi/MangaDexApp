@@ -9,6 +9,7 @@ import Foundation
 
 struct Manga: Decodable {
     let data: MangaInfo
+    let limit: Int
 }
 
 struct MangaList: Decodable {
