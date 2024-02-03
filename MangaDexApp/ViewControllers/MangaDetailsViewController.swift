@@ -10,6 +10,7 @@ import UIKit
 final class MangaDetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var mangaCover: UIImageView!
     
     @IBOutlet var titleLabel: UILabel!
@@ -24,11 +25,22 @@ final class MangaDetailsViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupActivityIndicator()
         
         titleLabel.text = manga?.attributes.title.en
         descriptionLabel.text = manga?.attributes.description?.en
         
         fetchData()
+    }
+}
+
+// MARK: - Private Methods
+private extension MangaDetailsViewController {
+    func setupActivityIndicator() {
+        activityIndicator.startAnimating()
+        activityIndicator.color = .white
+        activityIndicator.style = .medium
+        activityIndicator.hidesWhenStopped = true
     }
 }
 
@@ -61,6 +73,7 @@ private extension MangaDetailsViewController {
             switch result {
                 case .success(let imageData):
                     mangaCover.image = UIImage(data: imageData)
+                    activityIndicator.stopAnimating()
                 case .failure(let error):
                     print(error)
             }
