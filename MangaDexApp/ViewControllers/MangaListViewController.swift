@@ -54,6 +54,8 @@ private extension MangaListViewController {
             switch result {
                 case .success(let mangaList):
                     self.mangaList = mangaList
+                    print(mangaList.data.first?.id as Any)
+                    print(mangaList.data.first?.relationships as Any)
                     tableView.reloadData()
                 case .failure(let error):
                     print(error)
