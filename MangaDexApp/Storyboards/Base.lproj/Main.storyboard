@@ -16,18 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for manga..." id="5gU-i8-pmK">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="barTintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="JuA-7Z-eJd" id="Liy-tr-M6k"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mangaTitleCell" textLabel="iIm-qD-Whd" detailTextLabel="PYE-Lg-dru" style="IBUITableViewCellStyleSubtitle" id="4te-ef-VxJ">
-                                <rect key="frame" x="0.0" y="94" width="375" height="63.5"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="63.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4te-ef-VxJ" id="dlv-iQ-4xd">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
@@ -75,19 +66,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JFm-7T-9mr">
-                                <rect key="frame" x="16" y="144.5" width="343" height="200"/>
+                                <rect key="frame" x="16" y="116" width="343" height="267"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="hvY-Mc-w7Y">
-                                <rect key="frame" x="16" y="364.5" width="343" height="282.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hvY-Mc-w7Y">
+                                <rect key="frame" x="16" y="403" width="343" height="244"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdc-f1-ZdY">
-                                        <rect key="frame" x="144.5" y="0.0" width="54" height="94"/>
+                                        <rect key="frame" x="144.5" y="0.0" width="54" height="91.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pW-7v-bFG">
-                                        <rect key="frame" x="121.5" y="118" width="100.5" height="164.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="1pW-7v-bFG">
+                                        <rect key="frame" x="121.5" y="107.5" width="100.5" height="136.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -98,12 +89,12 @@
                         <viewLayoutGuide key="safeArea" id="aSe-gM-ICo"/>
                         <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="JFm-7T-9mr" firstAttribute="height" secondItem="igh-h4-UHc" secondAttribute="height" multiplier="0.3" id="01P-8g-XBU"/>
+                            <constraint firstItem="JFm-7T-9mr" firstAttribute="height" secondItem="igh-h4-UHc" secondAttribute="height" multiplier="0.4" id="01P-8g-XBU"/>
                             <constraint firstItem="aSe-gM-ICo" firstAttribute="trailing" secondItem="JFm-7T-9mr" secondAttribute="trailing" constant="16" id="C5X-ma-kue"/>
                             <constraint firstItem="aSe-gM-ICo" firstAttribute="trailing" secondItem="hvY-Mc-w7Y" secondAttribute="trailing" constant="16" id="NyA-7h-aez"/>
                             <constraint firstItem="hvY-Mc-w7Y" firstAttribute="leading" secondItem="aSe-gM-ICo" secondAttribute="leading" constant="16" id="P8b-AS-Uaj"/>
                             <constraint firstItem="hvY-Mc-w7Y" firstAttribute="top" secondItem="JFm-7T-9mr" secondAttribute="bottom" constant="20" id="QjX-6l-mR5"/>
-                            <constraint firstItem="JFm-7T-9mr" firstAttribute="top" secondItem="aSe-gM-ICo" secondAttribute="top" constant="20" id="cGN-Io-RRZ"/>
+                            <constraint firstItem="JFm-7T-9mr" firstAttribute="top" secondItem="aSe-gM-ICo" secondAttribute="top" id="cGN-Io-RRZ"/>
                             <constraint firstItem="aSe-gM-ICo" firstAttribute="bottom" secondItem="hvY-Mc-w7Y" secondAttribute="bottom" constant="20" id="uHp-j5-fqW"/>
                             <constraint firstItem="JFm-7T-9mr" firstAttribute="leading" secondItem="aSe-gM-ICo" secondAttribute="leading" constant="16" id="wIm-L4-NRA"/>
                         </constraints>
@@ -124,7 +115,7 @@
             <objects>
                 <navigationController id="K3V-Od-xaj" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="8xU-hh-cR8">
-                        <rect key="frame" x="0.0" y="20" width="375" height="104.5"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="0.4039215686" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
