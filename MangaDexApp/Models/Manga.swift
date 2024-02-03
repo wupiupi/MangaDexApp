@@ -7,10 +7,7 @@
 
 import Foundation
 
-//struct Manga: Decodable {
-//    let data: MangaInfo
-//}
-
+// MARK: - Manga
 struct MangaList: Decodable {
     let data: [MangaInfo]
 }
@@ -41,6 +38,7 @@ struct Relationship: Decodable {
     let type: String
 }
 
+// MARK: - Cover
 struct Cover: Decodable {
     let data: CoverData
 }

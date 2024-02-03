@@ -17,15 +17,11 @@ enum NetworkError: Error {
 enum Link {
     case mangaList
     case getManga
-    case getCover
     
     var url: URL {
         switch self {
             case .mangaList: URL(string: "https://api.mangadex.org/manga?limit=100")!
             case .getManga: URL(string: "https://api.mangadex.org/manga/f4fa3679-6918-4684-bcb6-377c9f336898")!
-                
-//          https://uploads.mangadex.org/covers/:manga-id/:cover-filename
-            case .getCover: URL(string: "https://uploads.mangadex.org/covers/")!
         }
     }
 }
@@ -33,8 +29,10 @@ enum Link {
 final class NetworkManager {
     static let shared = NetworkManager()
     
+    // MARK: - Initializers
     private init() {}
     
+    // MARK: - Public Methods
     func fetchImage(from url: URL, completion: @escaping(Result<Data, NetworkError>) -> Void) {
         DispatchQueue.global().async {
             guard let image = try? Data(contentsOf: url) else {
@@ -48,7 +46,11 @@ final class NetworkManager {
         }
     }
     
-    func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping(Result<T, NetworkError>) -> Void) {
+    func fetch<T: Decodable>(
+        _ type: T.Type,
+        from url: URL,
+        completion: @escaping(Result<T, NetworkError>) -> Void
+    ) {
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data else {
                 print(error ?? "No error description")

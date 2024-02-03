@@ -22,8 +22,8 @@ final class MangaListViewController: UITableViewController {
     // MARK: - Navigaion
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailsVC = segue.destination as? MangaDetailsViewController
-        guard let index = tableView.indexPathForSelectedRow?.row else { return }
-        detailsVC?.manga = mangaList?.data[index]
+        guard let mangaIndex = tableView.indexPathForSelectedRow?.row else { return }
+        detailsVC?.manga = mangaList?.data[mangaIndex]
     }
 
     // MARK: - UITableViewDataSource
@@ -54,8 +54,6 @@ private extension MangaListViewController {
             switch result {
                 case .success(let mangaList):
                     self.mangaList = mangaList
-                    print(mangaList.data.first?.id as Any)
-                    print(mangaList.data.first?.relationships as Any)
                     tableView.reloadData()
                 case .failure(let error):
                     print(error)
