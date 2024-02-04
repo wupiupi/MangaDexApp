@@ -18,8 +18,8 @@ final class MangaDetailsViewController: UIViewController {
     
     // MARK: - Properties
     var manga: MangaInfo?
-    private var imageCover = "https://uploads.mangadex.org/covers/"
     private let networkManager = NetworkManager.shared
+    private var imageCover = "https://uploads.mangadex.org/covers/"
     private var coverFileName = ""
     
     // MARK: - Life Cycle
@@ -48,10 +48,8 @@ private extension MangaDetailsViewController {
 private extension MangaDetailsViewController {
     func fetchData() {
         
-        let mangaCoverID = manga?.relationships.filter { $0.type == "cover_art" }
-        guard let firstId = mangaCoverID?.first?.id else { return }
-        
-        let coverURL = URL(string: "https://api.mangadex.org/cover/\(firstId)")!
+        guard let mangaCoverID = manga?.getCoverID() else { return }
+        let coverURL = URL(string: "https://api.mangadex.org/cover/\(mangaCoverID)")!
         
         networkManager.fetch(Cover.self, from: coverURL) { [weak self] result in
             guard let self else { return }
