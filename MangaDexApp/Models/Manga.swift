@@ -17,6 +17,10 @@ struct MangaInfo: Decodable {
     let type: String?
     let attributes: MangaAttributes
     let relationships: [Relationship]
+    
+    func getCoverID() -> String {
+        relationships.filter { $0.type == "cover_art" }.first?.id ?? ""
+    }
 }
 
 struct MangaAttributes: Decodable {
