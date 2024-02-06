@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 final class MangaListViewController: UITableViewController {
     
@@ -49,15 +50,27 @@ final class MangaListViewController: UITableViewController {
 // MARK: - Networking
 private extension MangaListViewController {
     func fetchData() {
-        networkManager.fetch(MangaList.self, from: Link.mangaList.url) { [weak self] result in
-            guard let self else { return }
-            switch result {
-                case .success(let mangaList):
-                    self.mangaList = mangaList
-                    tableView.reloadData()
-                case .failure(let error):
-                    print(error)
+        AF.request(Link.mangaList.url.absoluteString)
+            .validate()
+            .responseJSON { [unowned self] dataResponse in
+                switch dataResponse.result {
+                    case .success(let value):
+
+                        guard let mangaList = value as? [[String: Any]] else {
+                            return
+                        }
+                        
+                        for manga in mangaList {
+                            
+                        }
+                        
+                        print(mangaList)
+                        
+                        
+                        
+                    case .failure(let error):
+                        print(error)
+                }
             }
-        }
     }
 }

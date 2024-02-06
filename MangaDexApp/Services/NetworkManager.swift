@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 // MARK: - Enumerations
 enum NetworkError: Error {
@@ -20,7 +21,7 @@ enum Link {
     
     var url: URL {
         switch self {
-            case .mangaList: URL(string: "https://api.mangadex.org/manga?limit=100")!
+            case .mangaList: URL(string: "https://api.mangadex.org/manga?limit=50")!
             case .getManga: URL(string: "https://api.mangadex.org/manga/f4fa3679-6918-4684-bcb6-377c9f336898")!
         }
     }
@@ -46,28 +47,7 @@ final class NetworkManager {
         }
     }
     
-    func fetch<T: Decodable>(
-        _ type: T.Type,
-        from url: URL,
-        completion: @escaping(Result<T, NetworkError>) -> Void
-    ) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data else {
-                print(error ?? "No error description")
-                return
-            }
-            
-            do {
-                let networkData = try JSONDecoder().decode(T.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(networkData))
-                }
-                
-            } catch {
-                print(error)
-                completion(.failure(.decodingError))
-            }
-            
-        }.resume()
+    func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping(Result<T, NetworkError>) -> Void) {
+        
     }
 }
