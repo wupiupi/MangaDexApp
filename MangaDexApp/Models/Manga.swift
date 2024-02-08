@@ -8,33 +8,36 @@
 import Foundation
 
 // MARK: - Manga
-struct MangaList: Decodable {
-    let data: [MangaInfo]
-}
-
-struct MangaInfo: Decodable {
-    let id: String
-    let type: String?
-    let attributes: MangaAttributes
-    let relationships: [Relationship]
+struct MangaInfo {
+    var id: String
+    var type: String?
+    var attributes: MangaAttributes
+    var relationships: [Relationship]
     
-    init(mangaInfo: [String: Any]) {
-        id = mangaInfo["id"] as? String ?? ""
-        type = mangaInfo["type"] as? String ?? ""
-        attributes = MangaAttributes(
-            mangaAttributes: mangaInfo["attributes"] as? [String: Any] ?? [:]
-        )
-        relationships = [Relationship](
-            relationship: mangaInfo["relationships"] as? [String: Any] ?? [:]
-        )
+    init(mangaData: [String: Any]) {
+        id = mangaData["id"] as? String ?? ""
+        type = mangaData["type"] as? String ?? ""
+        
+        let mangaAttributes = mangaData["attributes"] as? [String: Any] ?? [:]
+        attributes = MangaAttributes(mangaAttributes: mangaAttributes)
+        
+        let mangaRelationships = mangaData["relationships"] as? [[String: Any]] ?? []
+        relationships = mangaRelationships.map{ Relationship(mangaRelationships: $0) }
     }
     
+    static func getMangas(with data: Any) -> [MangaInfo] {
+        guard let mangaData = data as? [String: Any] else { return [] }
+        guard let mangaInfos = mangaData["data"] as? [[String: Any]] else { return [] }
+        
+        return mangaInfos.map { MangaInfo(mangaData: $0) }
+    }
+        
     func getCoverID() -> String {
         relationships.filter { $0.type == "cover_art" }.first?.id ?? ""
     }
 }
 
-struct MangaAttributes: Decodable {
+struct MangaAttributes {
     let title: Language
     let description: Language?
     let lastVolume: String?
@@ -44,8 +47,8 @@ struct MangaAttributes: Decodable {
     let contentRating: String?
     
     init(mangaAttributes: [String: Any]) {
-        title = Language(language: mangaAttributes["en"] as? [String: Any] ?? [:])
-        description = Language(language: mangaAttributes["en"] as? [String: Any] ?? [:])
+        title = Language.getTitle(attributes: mangaAttributes)
+        description = Language.getDescription(attributes: mangaAttributes)
         lastVolume = mangaAttributes["lastVolume"] as? String ?? ""
         lastChapter = mangaAttributes["lastChapter"] as? String ?? ""
         status = mangaAttributes["status"] as? String ?? ""
@@ -54,33 +57,46 @@ struct MangaAttributes: Decodable {
     }
 }
 
-struct Language: Decodable {
+struct Language {
     let en: String?
     
-    init(language: [String: Any]) {
-        en = language["en"] as? String ?? ""
+    init(mangaLanguage: [String: Any]) {
+        
+        en = mangaLanguage["en"] as? String ?? ""
+    }
+    
+    static func getTitle(attributes: [String: Any]) -> Language {
+        let attributes = attributes["title"] as? [String: Any] ?? [:]
+        return Language(mangaLanguage: attributes)
+    }
+    
+    static func getDescription(attributes: [String: Any]) -> Language {
+        let attributes = attributes["description"] as? [String: Any] ?? [:]
+        return Language(mangaLanguage: attributes)
     }
 }
 
-struct Relationship: Decodable {
+struct Relationship {
     let id: String
     let type: String
     
-    init(relationship: [String: Any]) {
-        id = relationship["id"] as? String ?? ""
-        type = relationship["type"] as? String ?? ""
+    init(mangaRelationships: [String: Any]) {
+        id = mangaRelationships["id"] as? String ?? ""
+        type = mangaRelationships["type"] as? String ?? ""
     }
 }
 
 // MARK: - Cover
-struct Cover: Decodable {
-    let data: CoverData
-}
-
-struct CoverData: Decodable {
-    let attributes: CoverAttribute
-}
-
-struct CoverAttribute: Decodable {
+struct Cover {
     let fileName: String
+    
+    static func getFileName(value: Any) -> Cover {
+        let dict = value as? [String: Any] ?? [:]
+        let data = dict["data"] as? [String: Any] ?? [:]
+        let attributes = data["attributes"] as? [String: Any] ?? [:]
+        
+        let fileName = attributes["fileName"] as? String
+
+        return Cover(fileName: fileName ?? "")
+    }
 }

@@ -19,8 +19,9 @@ final class MangaDetailsViewController: UIViewController {
     // MARK: - Properties
     var manga: MangaInfo?
     private let networkManager = NetworkManager.shared
-    private var imageCover = "https://uploads.mangadex.org/covers/"
+    private var imageCoverURL = "https://uploads.mangadex.org/covers/"
     private var coverFileName = ""
+    private var coverIDURl = "https://api.mangadex.org/cover/"
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -29,8 +30,7 @@ final class MangaDetailsViewController: UIViewController {
         
         titleLabel.text = manga?.attributes.title.en
         descriptionLabel.text = manga?.attributes.description?.en
-        
-        fetchData()
+        getCoverID()
     }
 }
 
@@ -46,31 +46,26 @@ private extension MangaDetailsViewController {
 
 // MARK: - Networking
 private extension MangaDetailsViewController {
-    func fetchData() {
+    func getCoverID() {
+        coverIDURl += manga?.getCoverID() ?? ""
         
-        guard let mangaCoverID = manga?.getCoverID() else { return }
-        let coverURL = URL(string: "https://api.mangadex.org/cover/\(mangaCoverID)")!
-        
-        networkManager.fetch(Cover.self, from: coverURL) { [weak self] result in
-            guard let self else { return }
+        networkManager.fetchCoverID(from: coverIDURl) { [unowned self] result in
             switch result {
-                case .success(let cover):
-                    coverFileName = cover.data.attributes.fileName
-                    imageCover += manga?.id ?? ""
-                    imageCover += "/\(coverFileName)"
-                    setupImage(with: URL(string: imageCover)!)
+                case .success(let coverName):
+                    imageCoverURL += manga?.id ?? ""
+                    imageCoverURL += "/\(coverName)"
+                    fetchImage(with: imageCoverURL)
                 case .failure(let error):
                     print(error)
             }
         }
     }
     
-    func setupImage(with imageURL: URL) {
-        networkManager.fetchImage(from: imageURL) { [weak self] result in
-            guard let self else { return }
+    func fetchImage(with url: String) {
+        networkManager.fetchImage(from: url) { [unowned self] result in
             switch result {
-                case .success(let imageData):
-                    mangaCover.image = UIImage(data: imageData)
+                case .success(let data):
+                    mangaCover.image = UIImage(data: data)
                     activityIndicator.stopAnimating()
                 case .failure(let error):
                     print(error)

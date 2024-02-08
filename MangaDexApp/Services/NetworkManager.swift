@@ -9,12 +9,6 @@ import Foundation
 import Alamofire
 
 // MARK: - Enumerations
-enum NetworkError: Error {
-    case noData
-    case invalidURL
-    case decodingError
-}
-
 enum Link {
     case mangaList
     case getManga
@@ -33,21 +27,44 @@ final class NetworkManager {
     // MARK: - Initializers
     private init() {}
     
-    // MARK: - Public Methods
-    func fetchImage(from url: URL, completion: @escaping(Result<Data, NetworkError>) -> Void) {
-        DispatchQueue.global().async {
-            guard let image = try? Data(contentsOf: url) else {
-                completion(.failure(.noData))
-                return
+    func fetchData(from url: URL, completion: @escaping(Result<[MangaInfo], AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { responseData in
+                switch responseData.result {
+                    case .success(let value):
+                        let mangaInfo = MangaInfo.getMangas(with: value)
+                        completion(.success(mangaInfo))
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
             }
-            
-            DispatchQueue.main.async {
-                completion(.success(image))
-            }
-        }
     }
     
-    func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping(Result<T, NetworkError>) -> Void) {
-        
+    func fetchCoverID(from url: String, completion: @escaping(Result<String, AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { responseData in
+                switch responseData.result {
+                    case .success(let cover):
+                        let cover = Cover.getFileName(value: cover)
+                        completion(.success(cover.fileName))
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
+            }
+    }
+    
+    func fetchImage(from url: String, completion: @escaping(Result<Data, AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseData { responseData in
+                switch responseData.result {
+                    case .success(let data):
+                        completion(.success(data))
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
+            }
     }
 }
