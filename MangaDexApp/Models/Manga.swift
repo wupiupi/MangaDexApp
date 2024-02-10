@@ -47,8 +47,13 @@ struct MangaAttributes {
     let contentRating: String?
     
     init(mangaAttributes: [String: Any]) {
-        title = Language.getTitle(attributes: mangaAttributes)
-        description = Language.getDescription(attributes: mangaAttributes)
+        
+        let mangaTitle = mangaAttributes["title"] as? [String: String] ?? [:]
+        title = Language(mangaLanguage: mangaTitle)
+        
+        let mangaDescription = mangaAttributes["description"] as? [String: String] ?? [:]
+        description = Language(mangaLanguage: mangaDescription)
+        
         lastVolume = mangaAttributes["lastVolume"] as? String ?? ""
         lastChapter = mangaAttributes["lastChapter"] as? String ?? ""
         status = mangaAttributes["status"] as? String ?? ""
@@ -60,19 +65,8 @@ struct MangaAttributes {
 struct Language {
     let en: String?
     
-    init(mangaLanguage: [String: Any]) {
-        
-        en = mangaLanguage["en"] as? String ?? ""
-    }
-    
-    static func getTitle(attributes: [String: Any]) -> Language {
-        let attributes = attributes["title"] as? [String: Any] ?? [:]
-        return Language(mangaLanguage: attributes)
-    }
-    
-    static func getDescription(attributes: [String: Any]) -> Language {
-        let attributes = attributes["description"] as? [String: Any] ?? [:]
-        return Language(mangaLanguage: attributes)
+    init(mangaLanguage: [String: String]) {
+        en = mangaLanguage["en"]
     }
 }
 
